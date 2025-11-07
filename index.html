@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>💜 Feliz Cumpleaños, mi amor 💜</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(180deg, #2b0632, #4a0e56, #6f2385);
+    color: #fce9ff;
+    overflow-x: hidden;
+    text-align: center;
+    user-select: none;
+  }
+
+  h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3em;
+    margin-top: 1em;
+    text-shadow: 0 3px 6px rgba(0,0,0,0.4);
+  }
+
+  p.intro {
+    font-size: 1.2em;
+    margin: 1em auto 2em;
+    max-width: 90%;
+    line-height: 1.7em;
+    opacity: 0.9;
+  }
+
+  /* --- Galería tipo presentación --- */
+  .gallery-container {
+    position: relative;
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.08);
+    border-radius: 25px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+    padding: 25px;
+  }
+
+  .slide {
+    display: none;
+    animation: fade 1s ease-in-out;
+  }
+
+  @keyframes fade {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+  .slide img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    object-fit: cover;
+  }
+
+  .historia {
+    font-size: 1em;
+    margin-top: 15px;
+    padding: 10px 15px;
+    line-height: 1.6em;
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+  }
+
+  .nav-buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  button {
+    background: #e79ad3;
+    color: #4b1b44;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background: #f3b7e3;
+  }
+
+  /* --- Cupones --- */
+  .cupones {
+    background: rgba(255,255,255,0.08);
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 25px;
+    width: 90%;
+    max-width: 800px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+  }
+
+  .cupones h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.2em;
+    margin-bottom: 25px;
+  }
+
+  .cupon-lista {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .cupon {
+    background: #fff;
+    color: #6a2c5a;
+    border: 2px dashed #e79ad3;
+    padding: 20px;
+    border-radius: 15px;
+    width: 250px;
+    text-align: center;
+    transition: 0.3s;
+  }
+
+  .cupon:hover {
+    transform: scale(1.05);
+  }
+
+  .descargar {
+    margin-top: 10px;
+    display: inline-block;
+    background: #7a3d90;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9em;
+  }
+
+  .descargar:hover {
+    background: #a15fbf;
+  }
+
+  /* --- Trivia --- */
+  .trivia {
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    margin: 50px auto;
+    padding: 30px;
+    max-width: 650px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+  }
+
+  .trivia h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2em;
+    margin-bottom: 15px;
+  }
+
+  .question {
+    margin: 20px 0;
+    background: rgba(255,255,255,0.07);
+    padding: 15px;
+    border-radius: 15px;
+  }
+
+  .question p {
+    font-weight: 600;
+  }
+
+  label {
+    display: block;
+    margin: 5px 0;
+    cursor: pointer;
+  }
+
+  input[type="radio"], input[type="text"] {
+    margin-right: 10px;
+  }
+
+  input[type="text"] {
+    width: 90%;
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1em;
+  }
+
+  #resultado {
+    font-size: 1.2em;
+    margin-top: 20px;
+  }
+
+  #premio {
+    display: none;
+    font-size: 1.5em;
+    margin-top: 30px;
+    background: #fff;
+    color: #6a2c5a;
+    padding: 25px;
+    border-radius: 20px;
+    animation: aparecer 1s ease-in-out;
+  }
+
+  @keyframes aparecer {
+    from {opacity: 0; transform: scale(0.5);}
+    to {opacity: 1; transform: scale(1);}
+  }
+
+  /* --- Flores lisianthus flotando --- */
+  .flower {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/1/1b/Lisianthus_flower.png');
+    background-size: cover;
+    opacity: 0.8;
+    animation: float 10s linear infinite;
+  }
+
+  @keyframes float {
+    0% {transform: translateY(100vh) rotate(0deg); opacity: 0;}
+    10% {opacity: 1;}
+    90% {opacity: 1;}
+    100% {transform: translateY(-10vh) rotate(360deg); opacity: 0;}
+  }
+</style>
+</head>
+<body>
+
+<h1>💜 Feliz cumpleaños, mi amor 💜</h1>
+<p class="intro">Hoy celebro tu existencia, la sonrisa que ilumina mis días y el amor que hace que todo tenga sentido.  
+Eres mi inspiración, mi calma y mi mayor fortuna.  
+Cada foto aquí cuenta un pedacito de nuestra historia... 🌷</p>
+
+<!-- Galería -->
+<div class="gallery-container">
+  <div class="slide">
+    <img src="foto1.jpg">
+    <p class="historia">Esta es la ultima foto que tomamos cuando hicimos la ultima videollamada por facetime, guapa</p>
+  </div>
+
+  <div class="slide">
+    <img src="foto2.jpg">
+    <p class="historia">La mejor foto, me encanta como nos vemos, preciosota</p>
+  </div>
+
+ <div class="slide">
+    <img src="foto3.jpg">
+    <p class="historia">Es un poco mas de lo mismo, pero me encanto ese dia bebé, no tomes mucho otra vez jeje</p>
+  </div>
+  
+ <div class="slide">
+    <img src="foto4.jpg">
+    <p class="historia">Otra de la boda, nomas porque nos veiamos guapes</p>
+  </div>
+
+ <div class="slide">
+    <img src="foto5.jpg">
+    <p class="historia">la vez que fuimos a amaltea con el Quiroz, que ricos tacos, amos x mas</p>
+  </div>
+
+ <div class="slide">
+    <img src="foto6.jpg">
+    <p class="historia">en la fiesta de raquel, hubiera comido mas</p>
+  </div>
+
+ <div class="slide">
+    <img src="foto7.jpg">
+    <p class="historia">no se posar, pero tu sales super preciosa por eso esta me gustó</p>
+  </div>
+
+ <div class="slide">
+    <img src="foto8.jpg">
+    <p class="historia">Ese dia estuvo super bonito, casi me duernmo en el carro</p>
+  </div>
+ <div class="slide">
+    <img src="foto9.jpg">
+    <p class="historia">aqui te queria dar una besuqueada pero no quisiste :(</p>
+  </div>
+
+ <div class="slide">
+    <img src="foto10.jpg">
+    <p class="historia">que bonita sonrisa oiga, me deja besarla?</p>
+  </div>
+ <div class="slide">
+    <img src="foto11.jpg">
+    <p class="historia">en esta ya parecemos esposos, ya es hora no?, ya dame el anillo ps</p>
+  </div>
+ <div class="slide">
+    <img src="foto12.jpg">
+    <p class="historia">la iconica, que preciosa te ves, que se repita una ida al degollado, pd que hermosa wow</p>
+  </div>
+ <div class="slide">
+    <img src="foto13.jpg">
+    <p class="historia">No recuerdo a donde fuimos pero me gustó, besame mas</p>
+  </div>
+ <div class="slide">
+    <img src="foto14.jpg">
+    <p class="Ojo, primer viaje juntos, inolvidable la netota, me encantó</p>
+  </div>
+ <div class="slide">
+    <img src="foto15.jpg">
+    <p class="historia">Aqui no recuerdo a donde fuimos pero dios ve tu carita hermosa, besame x2</p>
+  </div>
+ <div class="slide">
+    <img src="foto16.jpg">
+    <p class="historia">mira mi cara JAJAJAJAJAJA, tu como siempre super guapa y te PEINASTEEEEEEEE</p>
+  </div>
+ <div class="slide">
+    <img src="foto17.jpg">
+    <p class="historia">Esta foto me gusta mucho, el 02 de julio cuando fuimos x un elote</p>
+  </div>
+ <div class="slide">
+    <img src="foto18.jpg">
+    <p class="historia">ahí fue cuando salimos al estadio y despues fuimos a cenar, terrible lugar pero buena musica</p>
+  </div>
+ <div class="slide">
+    <img src="foto19.jpg">
+    <p class="historia">ida al estadio, me encanto andar tomando cheve, rico rico</p>
+  </div>
+ <div class="slide">
+    <img src="foto20.jpg">
+    <p class="historia">Ve nomas que hermosa, yo andaba desvelado</p>
+  </div>
+
+  <div class="slide">
+    <img src="foto21.jpg">
+    <p class="historia">yo haciendo caras con gaspa para alivianar el momento JAJAJAAJJA</p>
+  </div>
+
+  <div class="nav-buttons">
+    <button id="prevBtn">⬅️ Anterior</button>
+    <button id="nextBtn">Siguiente ➡️</button>
+  </div>
+</div>
+
+<!-- Cupones -->
+<div class="cupones">
+  <h2>🎁 Cupones para ti 💝</h2>
+  <div class="cupon-lista">
+    <div class="cupon" id="c1">
+      💖 Cena en el lugar que tú elijas  
+      <br><a class="descargar" href="#" onclick="descargar('c1')">Descargar</a>
+    </div>
+    <div class="cupon" id="c2">
+      🌄 Día de hiking en Huaxtla  
+      <br><a class="descargar" href="#" onclick="descargar('c2')">Descargar</a>
+    </div>
+    <div class="cupon" id="c3">
+      🎬 Ida al cine  
+      <br><a class="descargar" href="#" onclick="descargar('c3')">Descargar</a>
+    </div>
+    <div class="cupon" id="c4">
+      💋 Lo que tú quieras 😉  
+      <br><a class="descargar" href="#" onclick="descargar('c4')">Descargar</a>
+    </div>
+  </div>
+</div>
+
+<!-- Trivia -->
+<div class="trivia">
+  <h2>💭 Trivia del amor 💭</h2>
+  <div class="question" data-correct="c">
+    <p>1️⃣ ¿Dónde fue nuestra primera cita?</p>
+    <label><input type="radio" name="q1" value="a"> En el parque</label>
+    <label><input type="radio" name="q1" value="b"> En el cine</label>
+    <label><input type="radio" name="q1" value="c"> En Amaltea</label>
+  </div>
+
+  <div class="question" data-correct="c">
+    <p>2️⃣ ¿Cuál es nuestra comida favorita?</p>
+    <label><input type="radio" name="q2" value="a"> Pizza</label>
+    <label><input type="radio" name="q2" value="b"> Tacos</label>
+    <label><input type="radio" name="q2" value="c"> Sushi</label>
+  </div>
+
+  <div class="question" data-correct="b">
+    <p>3️⃣ ¿Cuál es nuestro lugar favorito para salir?</p>
+    <label><input type="radio" name="q3" value="a"> El parque</label>
+    <label><input type="radio" name="q3" value="b"> Huaxtla</label>
+    <label><input type="radio" name="q3" value="c"> Centro comercial</label>
+  </div>
+
+  <div class="question" data-open="true">
+    <p>4️⃣ ¿Qué canción nos representa?</p>
+    <input type="text" name="q4" placeholder="Escribe tu respuesta 💜">
+  </div>
+
+  <div class="question" data-correct="c">
+    <p>5️⃣ ¿Cuál fue el último lugar donde fuimos juntos?</p>
+    <label><input type="radio" name="q5" value="a"> Restaurante</label>
+    <label><input type="radio" name="q5" value="b"> Parque</label>
+    <label><input type="radio" name="q5" value="c"> Cine</label>
+  </div>
+
+  <button onclick="revisarTrivia()">Enviar respuestas</button>
+  <div id="resultado"></div>
+  <div id="premio">🎉 ¡Ganaste el premio secreto! 💝<br><small>(Revisa el mensaje que dejé en tu almohada... 😏)</small></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+  // Flores flotantes
+  function crearFlor() {
+    const f = document.createElement("div");
+    f.className = "flower";
+    f.style.left = Math.random() * 100 + "vw";
+    f.style.animationDuration = (8 + Math.random() * 6) + "s";
+    f.style.opacity = 0.6 + Math.random() * 0.4;
+    f.style.transform = "rotate(" + (Math.random() * 360) + "deg)";
+    document.body.appendChild(f);
+    setTimeout(() => f.remove(), 12000);
+  }
+  setInterval(crearFlor, 900);
+
+  // Navegación entre fotos
+  let slideIndex = 0;
+  const slides = document.getElementsByClassName("slide");
+  mostrarSlide(slideIndex);
+
+  document.getElementById("prevBtn").onclick = () => cambiarSlide(-1);
+  document.getElementById("nextBtn").onclick = () => cambiarSlide(1);
+
+  function cambiarSlide(n) {
+    slideIndex += n;
+    if (slideIndex >= slides.length) slideIndex = 0;
+    if (slideIndex < 0) slideIndex = slides.length - 1;
+    mostrarSlide(slideIndex);
+  }
+
+  function mostrarSlide(n) {
+    for (let s of slides) s.style.display = "none";
+    slides[n].style.display = "block";
+  }
+
+  // Descargar cupones
+  function descargar(id) {
+    const nodo = document.getElementById(id);
+    html2canvas(nodo).then(canvas => {
+      const link = document.createElement("a");
+      link.download = id + ".png";
+      link.href = canvas.toDataURL();
+      link.click();
+    });
+  }
+
+  // Revisar trivia
+  function revisarTrivia() {
+    let preguntas = document.querySelectorAll(".question");
+    let aciertos = 0;
+    preguntas.forEach(q => {
+      if (q.dataset.open) {
+        const texto = q.querySelector("input[type='text']").value.trim();
+        if (texto.length > 0) aciertos++;
+      } else {
+        const correcta = q.dataset.correct;
+        const marcada = q.querySelector("input:checked");
+        if (marcada && marcada.value === correcta) aciertos++;
+      }
+    });
+
+    let resultado = document.getElementById("resultado");
+    if (aciertos >= 3) {
+      resultado.innerHTML = `💜 Aciertos: ${aciertos}/5 ¡Eres la mejor! 😍`;
+      document.getElementById("premio").style.display = "block";
+    } else {
+      resultado.innerHTML = `🥺 Aciertos: ${aciertos}/5... inténtalo de nuevo 💫`;
+    }
+  }
+</script>
+
+</body>
+</html>
